@@ -1,12 +1,12 @@
-image: marthoc/deconz:latest
+image: lenisko/deconz:latest
 manifests:
   -
-    image: marthoc/deconz:amd64
+    image: lenisko/deconz:amd64
     platform:
       architecture: amd64
       os: linux
   -
-    image: marthoc/deconz:armhf
+    image: lenisko/deconz:armhf
     platform:
       architecture: arm
       variant: armv7l

@@ -1,4 +1,4 @@
-FROM marthoc/deconz:armhf
+FROM lenisko/deconz:armhf
 
 # Add Hass.io-specific start script
 COPY run.sh /

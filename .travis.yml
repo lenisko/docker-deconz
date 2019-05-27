@@ -11,38 +11,38 @@ install:
   - chmod +x manifest-tool
 script:
 # Build amd64
-  - docker build -t "marthoc/deconz:amd64" ./amd64
+  - docker build -t "lenisko/deconz:amd64" ./amd64
 # Build amd64 Hass.io addon
-  - docker build -t "marthoc/hassio-addon-deconz-amd64" ./amd64-hassio-addon
+  - docker build -t "lenisko/hassio-addon-deconz-amd64" ./amd64-hassio-addon
 # Build armhf
   - docker run --rm --privileged multiarch/qemu-user-static:register --reset
-  - docker build -t "marthoc/deconz:armhf" ./armhf
+  - docker build -t "lenisko/deconz:armhf" ./armhf
 # Build armhf Hass.io addon
-  - docker build -t "marthoc/hassio-addon-deconz-armhf" ./armhf-hassio-addon
+  - docker build -t "lenisko/hassio-addon-deconz-armhf" ./armhf-hassio-addon
 after_success:
 # Tag and push built images
   - >
     if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
       docker login -u="$DOCKER_LOGIN" -p="$DOCKER_PASS"
       VERSION=$(cat .VERSION)
-      docker tag marthoc/deconz:amd64 marthoc/deconz:amd64-$VERSION
-      docker push marthoc/deconz:amd64
-      docker push marthoc/deconz:amd64-$VERSION
-      docker tag marthoc/hassio-addon-deconz-amd64 marthoc/hassio-addon-deconz-amd64:$VERSION
-      docker push marthoc/hassio-addon-deconz-amd64
-      docker push marthoc/hassio-addon-deconz-amd64:$VERSION
-      docker tag marthoc/deconz:armhf marthoc/deconz:armhf-$VERSION
-      docker push marthoc/deconz:armhf
-      docker push marthoc/deconz:armhf-$VERSION
-      docker tag marthoc/hassio-addon-deconz-armhf marthoc/hassio-addon-deconz-armhf:$VERSION
-      docker push marthoc/hassio-addon-deconz-armhf
-      docker push marthoc/hassio-addon-deconz-armhf:$VERSION
-      docker tag marthoc/hassio-addon-deconz-armhf marthoc/hassio-addon-deconz-aarch64
-      docker tag marthoc/hassio-addon-deconz-armhf marthoc/hassio-addon-deconz-aarch64:$VERSION
-      docker push marthoc/hassio-addon-deconz-aarch64
-      docker push marthoc/hassio-addon-deconz-aarch64:$VERSION
+      docker tag lenisko/deconz:amd64 lenisko/deconz:amd64-$VERSION
+      docker push lenisko/deconz:amd64
+      docker push lenisko/deconz:amd64-$VERSION
+      docker tag lenisko/hassio-addon-deconz-amd64 lenisko/hassio-addon-deconz-amd64:$VERSION
+      docker push lenisko/hassio-addon-deconz-amd64
+      docker push lenisko/hassio-addon-deconz-amd64:$VERSION
+      docker tag lenisko/deconz:armhf lenisko/deconz:armhf-$VERSION
+      docker push lenisko/deconz:armhf
+      docker push lenisko/deconz:armhf-$VERSION
+      docker tag lenisko/hassio-addon-deconz-armhf lenisko/hassio-addon-deconz-armhf:$VERSION
+      docker push lenisko/hassio-addon-deconz-armhf
+      docker push lenisko/hassio-addon-deconz-armhf:$VERSION
+      docker tag lenisko/hassio-addon-deconz-armhf lenisko/hassio-addon-deconz-aarch64
+      docker tag lenisko/hassio-addon-deconz-armhf lenisko/hassio-addon-deconz-aarch64:$VERSION
+      docker push lenisko/hassio-addon-deconz-aarch64
+      docker push lenisko/hassio-addon-deconz-aarch64:$VERSION
     fi
-# Update repository manifest for multiarch marthoc/deconz:latest
+# Update repository manifest for multiarch lenisko/deconz:latest
   - >
     if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
       ./manifest-tool --username $DOCKER_LOGIN --password $DOCKER_PASS push from-spec manifest.yml

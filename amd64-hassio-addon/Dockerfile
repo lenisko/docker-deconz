@@ -1,4 +1,4 @@
-FROM marthoc/deconz:amd64
+FROM lenisko/deconz:amd64
 
 # Add Hass.io-specific start script
 COPY run.sh /
